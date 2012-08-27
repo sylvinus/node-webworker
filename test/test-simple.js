@@ -12,6 +12,7 @@ var receivedExit = false;
 var w = new Worker(path.join(__dirname, 'workers', 'simple.js'));
 
 w.onmessage = function(e) {
+    console.log("w.onmessage",e);
     assert.ok('data' in e);
     assert.equal(e.data.bar, 'foo');
     assert.equal(e.data.bunkle, 'baz');
@@ -22,10 +23,13 @@ w.onmessage = function(e) {
 };
 
 w.onexit = function(c, s) {
+    console.log("w.onexit",c,s);
     assert.equal(c, 0);
     assert.equal(s, null);
 
     receivedExit = true;
+
+    process.exit(0);
 };
 
 w.postMessage({'foo' : 'bar', 'baz' : 'bunkle'});
@@ -33,4 +37,5 @@ w.postMessage({'foo' : 'bar', 'baz' : 'bunkle'});
 process.addListener('exit', function() {
     assert.equal(receivedMsg, true);
     assert.equal(receivedExit, true);
+    console.log("Final exit");
 });

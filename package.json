@@ -6,6 +6,10 @@
     "engines" : {
         "node" : ">=0.1.98"
     },
+    "dependencies":{
+        "ws":"0.4.21",
+        "eyes":"0.1.8"
+    },
     "repositories" : [
         {
             "type" : "git",

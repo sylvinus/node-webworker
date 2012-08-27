@@ -5,6 +5,7 @@ var sys = require('sys');
 var s = undefined;
 
 onmessage = function(e) {
+	console.log("worker: got message",e);
     assert.ok('fd' in e);
     assert.ok(e.fd > 0);
 
